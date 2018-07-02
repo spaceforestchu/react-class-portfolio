@@ -1,6 +1,29 @@
 import React, { Component } from 'react';
 
 class Contact extends Component {
+
+    state = {
+        name: '',
+        email: '',
+        subject: '',
+        message: ''
+    }
+
+    handleInput = e => {
+        console.log(e.target.value)
+
+        this.setState({
+            [e.target.name]: e.target.value
+        });
+    }
+
+    handleSubmit = e => {
+        e.preventDefault();
+        console.log(this.state)
+        e.target.reset();
+
+    }
+
     render() {
         return (
             <section id="contact" className="s-contact target-section">
@@ -18,20 +41,20 @@ class Contact extends Component {
         
                 <div className="row contact__main">
                     <div className="col-eight tab-full contact__form">
-                        <form name="contactForm" id="contactForm" method="post" action="">
+                        <form name="contactForm" id="contactForm" method="post" action="" onSubmit={this.handleSubmit}>
                             <fieldset>
             
                             <div className="form-field">
-                                <input name="contactName" type="text" id="contactName" placeholder="Name" value="" minlength="2" required="" aria-required="true" className="full-width" />
+                                <input name="name" onChange={this.handleInput} type="text" id="contactName" placeholder="Name" minLength="2" required="" aria-required="true" className="full-width" />
                             </div>
                             <div className="form-field">
-                                <input name="contactEmail" type="email" id="contactEmail" placeholder="Email" value="" required="" aria-required="true" className="full-width" />
+                                <input name="email" onChange={this.handleInput} type="email" id="contactEmail" placeholder="Email" required="" aria-required="true" className="full-width" />
                             </div>
                             <div className="form-field">
-                                <input name="contactSubject" type="text" id="contactSubject" placeholder="Subject" value="" className="full-width" />
+                                <input name="subject" onChange={this.handleInput} type="text" id="contactSubject" placeholder="Subject" className="full-width" />
                             </div>
                             <div className="form-field">
-                                <textarea name="contactMessage" id="contactMessage" placeholder="message" rows="10" cols="50" required="" aria-required="true" className="full-width"></textarea>
+                                <textarea name="message" onChange={this.handleInput} id="contactMessage" placeholder="message" rows="10" cols="50" required="" aria-required="true" className="full-width"></textarea>
                             </div>
                             <div className="form-field">
                                 <button className="full-width btn--primary">Submit</button>
